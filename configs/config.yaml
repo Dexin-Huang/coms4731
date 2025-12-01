@@ -1,0 +1,73 @@
+# Basketball Free Throw Prediction Configuration
+
+# Data settings
+data:
+  data_dir: "data/raw/Basketball_51 dataset"  # Directory containing ft0/ and ft1/ folders
+  splits_dir: "data/splits"      # Directory for train/val/test CSVs
+  n_frames: 16                   # Number of frames to sample per video
+  frame_size: [224, 224]         # Frame size (H, W)
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  balance_strategy: "weighted"   # Options: none, oversample, weighted
+
+# Model settings
+model:
+  type: "swin_tiny"              # Options: swin_tiny, swin_small, swin_base, r3d
+  pretrained: true
+  num_classes: 2
+  dropout: 0.5
+
+# Training settings
+training:
+  # Stage 1: Train head only
+  stage1:
+    epochs: 5
+    learning_rate: 0.001
+    freeze_backbone: true
+
+  # Stage 2: Fine-tune all
+  stage2:
+    epochs: 30
+    backbone_lr: 0.00001         # Lower LR for pretrained backbone
+    head_lr: 0.0001              # Higher LR for classification head
+
+  # Common settings
+  batch_size: 8
+  num_workers: 4
+  weight_decay: 0.05
+  scheduler: "cosine"            # Options: cosine, step, none
+  warmup_epochs: 2
+
+  # Early stopping
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+
+  # Class imbalance handling
+  use_class_weights: true
+  label_smoothing: 0.1
+  loss_type: "focal"             # Options: cross_entropy, focal
+  focal_gamma: 2.0               # Focusing parameter for focal loss
+
+# Evaluation settings
+evaluation:
+  metrics: ["accuracy", "f1", "auroc", "precision", "recall"]
+  save_confusion_matrix: true
+  test_time_augmentation: false   # Multi-crop evaluation
+
+# Logging and checkpoints
+logging:
+  log_dir: "logs"
+  checkpoint_dir: "checkpoints"
+  save_top_k: 3                  # Save top k checkpoints by val_acc
+  log_every_n_steps: 10
+
+# Hardware
+hardware:
+  accelerator: "auto"            # auto, gpu, cpu
+  devices: 1
+  precision: "16-mixed"          # 16-mixed, 32, bf16-mixed
+
+# Random seed
+seed: 42

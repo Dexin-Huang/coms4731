@@ -1,0 +1,35 @@
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+pytorch-lightning>=2.0.0
+
+# Computer Vision
+opencv-python>=4.8.0
+albumentations>=1.3.0
+
+# Pose Estimation
+# SAM 3D Body - install from GitHub:
+#   pip install git+https://github.com/facebookresearch/sam-3d-body.git
+# Or download checkpoints from HuggingFace:
+#   huggingface-cli download facebook/sam-3d-body-dinov3 --local-dir checkpoints/sam-3d-body-dinov3
+mediapipe>=0.10.0  # Fallback pose estimation
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.2.0
+
+# Pose Baseline Classifier
+xgboost>=2.0.0
+joblib>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tensorboard>=2.13.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+huggingface-hub>=0.19.0  # For downloading SAM 3D Body checkpoints

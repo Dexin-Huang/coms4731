@@ -1,0 +1,9 @@
+The format of the final report should contain the following sections--it should read like a standard research conference paper:
+
+Introduction
+Related Work
+Method Overview
+Experiments and Results
+Discussions
+Conclusions
+Please make sure all team members names and UNIs are at the top with the title of the report.  There is no expectation on page count, but figure 8-12 pages is a reasonable target length.
