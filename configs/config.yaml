@@ -2,7 +2,7 @@
 
 # Data settings
 data:
-  data_dir: "data/raw/Basketball_51 dataset"  # Directory containing ft0/ and ft1/ folders
+  data_dir: "data/Basketball_51 dataset"  # Directory containing ft0/ and ft1/ folders
   splits_dir: "data/splits"      # Directory for train/val/test CSVs
   n_frames: 16                   # Number of frames to sample per video
   frame_size: [224, 224]         # Frame size (H, W)
@@ -10,6 +10,12 @@ data:
   val_ratio: 0.15
   test_ratio: 0.15
   balance_strategy: "weighted"   # Options: none, oversample, weighted
+
+# Pose baseline settings
+pose:
+  use_sam3d: false               # false = MediaPipe (fast), true = SAM3D (richer but slower)
+  n_frames: 16                   # Frames to sample for pose extraction
+  features_dir: "data/pose_features"
 
 # Model settings
 model:
